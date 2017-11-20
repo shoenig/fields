@@ -40,7 +40,7 @@ func parseSet(columns string) ([]int, error) {
 	}
 
 	splitComma := strings.Split(columns, ",")
-	nums := []int{}
+	var nums []int
 	for _, split := range splitComma {
 		cols, err := parseColumns(split)
 		if err != nil {

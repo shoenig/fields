@@ -20,25 +20,25 @@ func Test_indexes(t *testing.T) {
 		{
 			columns: []int{1},
 			exp: map[int][]int{
-				1: []int{0},
+				1: {0},
 			},
 		},
 		{
 			columns: []int{3, 4, 5},
 			exp: map[int][]int{
-				3: []int{0},
-				4: []int{1},
-				5: []int{2},
+				3: {0},
+				4: {1},
+				5: {2},
 			},
 		},
 		{
 			columns: []int{9, 3, 3, 5, 0, 1, 3, 0},
 			exp: map[int][]int{
-				9: []int{0},
-				3: []int{1, 2, 6},
-				5: []int{3},
-				0: []int{4, 7},
-				1: []int{5},
+				9: {0},
+				3: {1, 2, 6},
+				5: {3},
+				0: {4, 7},
+				1: {5},
 			},
 		},
 	}
