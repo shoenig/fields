@@ -1,64 +1,108 @@
-// Author Seth Hoenig (seth.a.hoenig@gmail.com)
-
-package main
+package fields // import "gophers.dev/cmds/fields"
 
 import (
 	"bufio"
 	"io"
+	"strings"
+
+	"github.com/pkg/errors"
 )
 
-func apply(columns []int, input io.Reader, output io.Writer) error {
-	fields := make([]string, len(columns), len(columns))
-	c2i := indexes(columns)
+// Apply will actually select the desired columns from the input and write them
+// back out into the output in the same order in which they were requested.
+func Apply(columns Columns, input io.Reader, output io.Writer) error {
+	// Need to know how many words there are so columns can know how many /
+	// which words to select on to forward into the output.
+	// There's a more efficient way to do this that involves reading words one
+	// at a time and keeping track until we resolve the columns selection,
+	// but meh.
 
 	scanner := bufio.NewScanner(input)
-	scanner.Split(bufio.ScanWords)
-	col := 0
+
 	for scanner.Scan() {
-		if indexes, exists := c2i[col]; exists {
-			field := scanner.Text()
-			for _, index := range indexes {
-				fields[index] = field
-			}
+		line := scanner.Text()
+		if err := process(
+			line,
+			output,
+			columns,
+		); err != nil {
+			return err
 		}
-		col++
 	}
-	if err := scanner.Err(); err != nil {
+
+	return scanner.Err()
+}
+
+func process(line string, output io.Writer, columns Columns) error {
+	// get the words of the input
+	words, err := read(line)
+	if err != nil {
 		return err
 	}
 
-	return write(noBlanks(fields), output)
-}
+	// compute which columns are going to be selected
+	cols := columns.Columns(len(words))
 
-func indexes(columns []int) map[int][]int {
-	col2indexes := make(map[int][]int)
-	for index, column := range columns {
-		col2indexes[column] = append(col2indexes[column], index)
+	// check the selected columns are possible
+	if err := validate(cols, len(words)); err != nil {
+		return err
 	}
-	return col2indexes
-}
 
-func noBlanks(fields []string) []string {
-	clean := make([]string, 0, len(fields))
-	for _, field := range fields {
-		if field != "" {
-			clean = append(clean, field)
-		}
+	// select the words of the wanted columns
+	chosen := zip(cols, words)
+
+	// write the selected columns to the output
+	if err := write(chosen, output); err != nil {
+		return err
 	}
-	return clean
+
+	// append a newline character after each line
+	if _, err := io.WriteString(output, "\n"); err != nil {
+		return err
+	}
+
+	return nil
 }
 
-func write(fields []string, output io.Writer) error {
-	for i, field := range fields {
-		if _, err := io.WriteString(output, field); err != nil {
-			return err
-		}
+func write(words []string, output io.Writer) error {
+	o := strings.Join(words, " ")
+	_, err := io.WriteString(output, o)
+	return err
+}
 
-		if i < len(fields)-1 {
-			if _, err := io.WriteString(output, " "); err != nil {
-				return err
-			}
+func validate(cols []int, n int) error {
+	if len(cols) == 0 {
+		return errors.Errorf("no columns match input length")
+	}
+
+	max := n - 1
+	for _, col := range cols {
+		if col > max {
+			return errors.Errorf("column %d is out of range [0,%d]", col, max)
 		}
 	}
 	return nil
+}
+
+func zip(cols []int, words []string) []string {
+	chosen := make([]string, 0, len(cols))
+	for _, col := range cols {
+		chosen = append(chosen, words[col])
+	}
+	return chosen
+}
+
+func read(line string) ([]string, error) {
+	words := make([]string, 0, 10)
+
+	input := strings.NewReader(line)
+	scanner := bufio.NewScanner(input)
+	scanner.Split(bufio.ScanWords)
+
+	for scanner.Scan() {
+		word := scanner.Text()
+		words = append(words, word)
+	}
+
+	return words, scanner.Err()
 }
