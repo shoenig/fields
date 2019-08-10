@@ -4,7 +4,7 @@ fields
 Use `fields` to chop input into selectable columns.
 
 [![Go Report Card](https://goreportcard.com/badge/gophers.dev/cmds/fields)](https://goreportcard.com/report/gophers.dev/cmds/fields)
-[![Build Status](https://travis-ci.com/shoenig/fields.svg?branch=master)](https://travis-ci.com/shoenig/fields)
+[![Build Status](https://travis-ci.org/shoenig/fields.svg?branch=master)](https://travis-ci.org/shoenig/fields)
 [![GoDoc](https://godoc.org/gophers.dev/cmds/fields?status.svg)](https://godoc.org/gophers.dev/cmds/fields)
 ![NetflixOSS Lifecycle](https://img.shields.io/osslifecycle/shoenig/fields.svg)
 ![GitHub](https://img.shields.io/github/license/shoenig/fields.svg)
