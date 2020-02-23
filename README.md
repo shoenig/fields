@@ -9,6 +9,8 @@ Use `fields` to chop input into selectable columns.
 ![NetflixOSS Lifecycle](https://img.shields.io/osslifecycle/shoenig/fields.svg)
 ![GitHub](https://img.shields.io/github/license/shoenig/fields.svg)
 
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/fields)
+
 # Project Overview
 
 Module `gophers.dev/cmds/fields` provides a command-line utility for processing
