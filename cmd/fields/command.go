@@ -12,8 +12,8 @@ import (
 )
 
 const (
-	delimitersLabel = "cutset"
-	newLineLabel    = "newline"
+	// delimitersLabel = "cutset"
+	newLineLabel = "newline"
 )
 
 const (
@@ -23,7 +23,7 @@ const (
 
 func createFlagSet() *flag.FlagSet {
 	fs := flag.NewFlagSet("fields-flag-set", flag.ContinueOnError)
-	fs.String(delimitersLabel, "", "set of characters to cut on")
+	// fs.String(delimitersLabel, "", "set of characters to cut on")
 	fs.Bool(newLineLabel, true, "print trailing newline character")
 	return fs
 }
@@ -47,6 +47,11 @@ type command struct {
 }
 
 func (c *command) Execute(args []string) int {
+	if len(args) != 1 {
+		_, _ = fmt.Fprintf(c.io.stdErr, helpText)
+		return exitErr
+	}
+
 	delimiters, columns, err := setup(c.flags, args)
 	if err != nil {
 		_, _ = fmt.Fprintf(c.io.stdErr, "fatal: %v\n", err)
@@ -67,19 +72,21 @@ func (c *command) Execute(args []string) int {
 }
 
 func setup(fs *flag.FlagSet, args []string) (string, string, error) {
+	if len(args) != 1 {
+		return "", "", errors.Errorf("expected 1 argument, got %d", len(args))
+	}
+
 	err := fs.Parse(args)
 	if err != nil {
 		return "", "", errors.Wrapf(err, "parse args: %v", args)
 	}
 
-	separators := fs.Lookup(delimitersLabel).Value.String()
-	if separators != "" {
-		return "", "", errors.Errorf("custom cutsets not yet supported")
-	}
-
-	if fs.NArg() != 1 {
-		return "", "", errors.Errorf("expected 1 argument, got %d", fs.NArg())
-	}
+	// todo: support custom cutset
+	//separators := fs.Lookup(delimitersLabel).Value.String()
+	//if separators != "" {
+	//	return "", "", errors.Errorf("custom cutsets not yet supported")
+	//}
+	separators := ""
 
 	remArgs := fs.Args()
 	return separators, remArgs[0], nil

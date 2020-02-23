@@ -31,6 +31,8 @@ func Test_setup_undefined_arg(t *testing.T) {
 }
 
 func Test_setup_cutset_nys(t *testing.T) {
+	t.Skip("custom cutset not yet supported")
+
 	fs := createFlagSet()
 	args := []string{"--cutset", "a"}
 	_, _, err := setup(fs, args)
