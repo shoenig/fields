@@ -16,6 +16,15 @@ columns of input text.
 
 # Getting Started
 
+#### Install from SnapCraft
+
+The `fields` command can be installed as a snap
+```bash
+$ sudo snap install fields
+```
+
+#### Build from source
+
 The `fields` command can be installed by running
 ```bash
 $ go get gophers.dev/cmds/fields/cmd/fields
