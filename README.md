@@ -25,7 +25,7 @@ $ sudo snap install fields
 
 #### Build from source
 
-The `fields` command can be installed by running
+The `fields` command can be compiled by running
 ```bash
 $ go get gophers.dev/cmds/fields/cmd/fields
 ```
