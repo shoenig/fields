@@ -20,17 +20,22 @@ func Apply(columns Columns, input io.Reader, output io.Writer) error {
 	scanner := bufio.NewScanner(input)
 
 	for scanner.Scan() {
-		line := scanner.Text()
-		if err := process(
-			line,
-			output,
-			columns,
-		); err != nil {
-			return err
+		if line := next(scanner); line != "" {
+			if err := process(
+				line,
+				output,
+				columns,
+			); err != nil {
+				return err
+			}
 		}
 	}
 
 	return scanner.Err()
+}
+
+func next(scanner *bufio.Scanner) string {
+	return strings.TrimSpace(scanner.Text())
 }
 
 func process(line string, output io.Writer, columns Columns) error {

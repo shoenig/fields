@@ -60,3 +60,15 @@ func Test_Apply_rightExp(t *testing.T) {
 	try(t, rec, "a b c d e f g", "c d e f g", false)
 	try(t, rec, "a b", "", true) // out of bounds
 }
+
+const textBlock = `
+a b c d
+e f g
+
+h i j
+`
+
+func Test_Apply_emptyLines(t *testing.T) {
+	ic2 := &individualColumn{column: 2}
+	try(t, ic2, textBlock, "b\nf\ni", false)
+}
