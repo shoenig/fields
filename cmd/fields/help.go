@@ -48,5 +48,5 @@ const helpText = `fields - CLI columnar text processor [v1]
 	  $ fields -- -2,3:5,6: <<< "a b c d e f g"		=> f c d e f g
 
 	Bugs)
-	Report bugs & features requests @ https://github.com/shoenig/fields/issues
+	Report bugs & feature requests @ https://github.com/shoenig/fields/issues
 `
