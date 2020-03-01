@@ -46,10 +46,20 @@ type command struct {
 	io    inOut
 }
 
+func acceptable(args []string) bool {
+	switch len(args) {
+	case 1:
+		return true
+	case 2:
+		return args[0] == "--"
+	default:
+		return false
+	}
+}
+
 func (c *command) Execute(args []string) int {
-	if len(args) != 1 {
+	if !acceptable(args) {
 		_, _ = fmt.Fprintf(c.io.stdErr, helpText)
-		return exitErr
 	}
 
 	delimiters, columns, err := setup(c.flags, args)
@@ -72,7 +82,7 @@ func (c *command) Execute(args []string) int {
 }
 
 func setup(fs *flag.FlagSet, args []string) (string, string, error) {
-	if len(args) != 1 {
+	if !acceptable(args) {
 		return "", "", errors.Errorf("expected 1 argument, got %d", len(args))
 	}
 
