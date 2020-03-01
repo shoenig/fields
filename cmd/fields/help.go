@@ -27,7 +27,7 @@ const helpText = `fields - CLI columnar text processor [v1]
 
 	Examples)
 	select a single column (from left)
-	  $ fields 3 <<< "a b c d e f g"			=> 3
+	  $ fields 3 <<< "a b c d e f g"			=> c
 
 	select a single column (from right)
 	  $ fields -- -3 <<< "a b c d e f g"			=> e
