@@ -23,4 +23,6 @@ parts:
     go-channel: 1.13/stable
     source-tag: v0.1.2
     go-packages: [github.com/shoenig/fields/cmd/fields]
+    build-packages:
+      - git
 
