@@ -1,6 +1,6 @@
 name: fields
 base: core18
-version: 'v0.1.2'
+version: 'v0.1.3'
 summary: CLI tool for parsing columnar text
 description: |
   fields is a tool for selecting columns of text. One or more individual columns
@@ -21,7 +21,7 @@ parts:
   fields:
     plugin: go
     go-channel: 1.13/stable
-    source-tag: v0.1.2
+    source-tag: v0.1.3
     go-packages: [github.com/shoenig/fields/cmd/fields]
     build-packages:
       - git
