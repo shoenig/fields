@@ -29,7 +29,7 @@ $ sudo snap install fields
 
 The `fields` command can be compiled by running
 ```bash
-$ go get gophers.dev/cmds/fields/cmd/fields
+$ go install gophers.dev/cmds/fields/cmd/fields@latest
 ```
 
 # Example Usages
