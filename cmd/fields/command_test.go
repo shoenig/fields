@@ -5,12 +5,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/stretchr/testify/require"
+	"github.com/shoenig/test/must"
 )
 
 func Test_createFlagSet(t *testing.T) {
 	fs := createFlagSet()
-	require.NotNil(t, fs)
+	must.NotNil(t, fs)
 }
 
 func Test_setup(t *testing.T) {
@@ -18,16 +18,16 @@ func Test_setup(t *testing.T) {
 	args := []string{"1,3,5"}
 
 	seps, rem, err := setup(fs, args)
-	require.NoError(t, err)
-	require.Equal(t, "1,3,5", rem)
-	require.Equal(t, "", seps)
+	must.NoError(t, err)
+	must.EqCmp(t, "1,3,5", rem)
+	must.EqCmp(t, "", seps)
 }
 
 func Test_setup_undefined_arg(t *testing.T) {
 	fs := createFlagSet()
 	args := []string{"--foo"}
 	_, _, err := setup(fs, args)
-	require.EqualError(t, err, "parse args: [--foo]: flag provided but not defined: -foo")
+	must.EqError(t, err, "parse args: [--foo]: flag provided but not defined: -foo")
 }
 
 func Test_setup_cutset_nys(t *testing.T) {
@@ -36,14 +36,14 @@ func Test_setup_cutset_nys(t *testing.T) {
 	fs := createFlagSet()
 	args := []string{"--cutset", "a"}
 	_, _, err := setup(fs, args)
-	require.EqualError(t, err, "custom cutsets not yet supported")
+	must.EqError(t, err, "custom cutsets not yet supported")
 }
 
 func Test_setup_wrong_nargs(t *testing.T) {
 	fs := createFlagSet()
 	args := []string{"1", "2", "3"}
 	_, _, err := setup(fs, args)
-	require.EqualError(t, err, "expected 1 argument, got 3")
+	must.EqError(t, err, "expected 1 argument, got 3")
 }
 
 func Test_do(t *testing.T) {
@@ -51,10 +51,10 @@ func Test_do(t *testing.T) {
 	input := strings.NewReader("a b c d e f")
 	var output bytes.Buffer
 	err := do("", s, input, &output)
-	require.NoError(t, err)
+	must.NoError(t, err)
 
 	result := output.String()
-	require.Equal(t, "b d\n", result)
+	must.EqCmp(t, "b d\n", result)
 }
 
 func Test_do_bad_fields(t *testing.T) {
@@ -62,14 +62,14 @@ func Test_do_bad_fields(t *testing.T) {
 	input := strings.NewReader("a b c d e f")
 	var output bytes.Buffer
 	err := do("", s, input, &output)
-	require.EqualError(t, err, `failed to parse column set: not valid syntax "huh"`)
+	must.EqError(t, err, `failed to parse column set: not valid syntax "huh"`)
 }
 
 func Test_finish(t *testing.T) {
 	fs := createFlagSet()
 	var output bytes.Buffer
 	err := finish(fs, &output)
-	require.NoError(t, err)
+	must.NoError(t, err)
 }
 
 func Test_Execute(t *testing.T) {
@@ -86,11 +86,11 @@ func Test_Execute(t *testing.T) {
 	})
 
 	exitCode := cmd.Execute([]string{"2:4,1"})
-	require.Equal(t, exitOK, exitCode)
+	must.EqCmp(t, exitOK, exitCode)
 
 	outStr := stdOut.String()
-	require.Equal(t, "b c d a\n", outStr)
+	must.EqCmp(t, "b c d a\n", outStr)
 
 	errStr := stdErr.String()
-	require.Equal(t, "", errStr)
+	must.EqCmp(t, "", errStr)
 }

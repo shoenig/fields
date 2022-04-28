@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/stretchr/testify/require"
+	"github.com/shoenig/test/must"
 )
 
 func try(t *testing.T, c Columns, in, expOut string, expErr bool) {
@@ -14,11 +14,11 @@ func try(t *testing.T, c Columns, in, expOut string, expErr bool) {
 	err := Apply(c, inR, out)
 
 	if expErr {
-		require.Error(t, err)
+		must.Error(t, err)
 	} else {
-		require.NoError(t, err)
+		must.NoError(t, err)
 		output := strings.TrimSpace(out.String())
-		require.Equal(t, expOut, output)
+		must.Eq(t, expOut, output)
 	}
 }
 
