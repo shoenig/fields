@@ -4,8 +4,7 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/stretchr/testify/require"
-
+	"github.com/shoenig/test/must"
 	"gophers.dev/pkgs/regexplus"
 )
 
@@ -14,16 +13,17 @@ func try1(t *testing.T, s string, match bool, exp string, re *regexp.Regexp) {
 
 	if match {
 		// check the regex matches
-		require.True(t, matches)
+		must.True(t, matches)
 
 		// check the regex gets the right value
 		result := regexplus.FindNamedSubmatches(
 			re, s,
 		)["n"]
-		require.Equal(t, exp, result)
+		must.Eq(t, exp, result)
+
 	} else {
 		// check the regex does not match
-		require.False(t, matches)
+		must.False(t, matches)
 	}
 }
 
@@ -44,16 +44,16 @@ func Test_RE_rangeRe(t *testing.T) {
 		matches := rangeRe.MatchString(s)
 		if match {
 			// check the regex matches
-			require.True(t, matches)
+			must.True(t, matches)
 
 			subs := regexplus.FindNamedSubmatches(rangeRe, s)
 			l := subs["l"]
 			r := subs["r"]
-			require.Equal(t, expL, l)
-			require.Equal(t, expR, r)
+			must.Eq(t, expL, l)
+			must.Eq(t, expR, r)
 		} else {
 			// check the regex does not match
-			require.False(t, matches)
+			must.False(t, matches)
 		}
 	}
 
@@ -90,40 +90,40 @@ func Test_rightExpRe(t *testing.T) {
 
 func Test_Interpret_individual(t *testing.T) {
 	spanner, err := Single("1")
-	require.NoError(t, err)
+	must.NoError(t, err)
 
 	_, ok := spanner.(*individualParser)
-	require.True(t, ok)
+	must.True(t, ok)
 }
 
 func Test_Interpret_range(t *testing.T) {
 	spanner, err := Single("2:5")
-	require.NoError(t, err)
+	must.NoError(t, err)
 
 	_, ok := spanner.(*rangeParser)
-	require.True(t, ok)
+	must.True(t, ok)
 }
 
 func Test_Interpret_leftExp(t *testing.T) {
 	spanner, err := Single(":2")
-	require.NoError(t, err)
+	must.NoError(t, err)
 
 	_, ok := spanner.(*leftExpParser)
-	require.True(t, ok)
+	must.True(t, ok)
 }
 
 func Test_Interpret_rightExp(t *testing.T) {
 	spanner, err := Single("2:")
-	require.NoError(t, err)
+	must.NoError(t, err)
 
 	_, ok := spanner.(*rightExpParser)
-	require.True(t, ok)
+	must.True(t, ok)
 }
 
 func Test_Interpret_malformed(t *testing.T) {
 	try := func(input string) {
 		_, err := Single(input)
-		require.Error(t, err)
+		must.Error(t, err)
 	}
 
 	try("")
@@ -143,7 +143,7 @@ func Test_individualColumn_Columns(t *testing.T) {
 	try := func(c, n int, exp []int) {
 		ic := &individualColumn{column: c}
 		iList := ic.Columns(n)
-		require.Equal(t, exp, iList)
+		must.Eq(t, exp, iList)
 	}
 
 	try(1, 3, []int{0})
@@ -157,7 +157,7 @@ func Test_rangeOfColumns_Columns(t *testing.T) {
 	try := func(cols []int, n int, exp []int) {
 		ic := &rangeOfColumns{columns: cols}
 		iList := ic.Columns(n)
-		require.Equal(t, exp, iList)
+		must.Eq(t, exp, iList)
 	}
 
 	// all it does is copy the list of columns
@@ -168,7 +168,7 @@ func Test_leftExpColumns_Columns(t *testing.T) {
 	try := func(leftIdx, n int, exp []int) {
 		lec := &leftExpColumns{leftIndex: leftIdx}
 		iList := lec.Columns(n)
-		require.Equal(t, exp, iList)
+		must.Eq(t, exp, iList)
 	}
 
 	try(2, 4, []int{0, 1})
@@ -184,7 +184,7 @@ func Test_rightExpColumns_Columns(t *testing.T) {
 	try := func(rightIdx, n int, exp []int) {
 		rec := &rightExpColumns{rightIndex: rightIdx}
 		iList := rec.Columns(n)
-		require.Equal(t, exp, iList)
+		must.Eq(t, exp, iList)
 	}
 
 	try(1, 4, []int{0, 1, 2, 3})
@@ -199,9 +199,9 @@ func Test_individualParser_Spans(t *testing.T) {
 	try := func(input string, n int, exp []int) {
 		ip := &individualParser{}
 		cols, err := ip.Spans(input)
-		require.NoError(t, err)
+		must.NoError(t, err)
 		iList := cols.Columns(n)
-		require.Equal(t, exp, iList)
+		must.Eq(t, exp, iList)
 	}
 
 	try("1", 3, []int{0})
@@ -213,7 +213,7 @@ func Test_individualParser_Spans(t *testing.T) {
 func Test_fill(t *testing.T) {
 	try := func(left, right int, exp []int) {
 		nums := fill(left, right)
-		require.Equal(t, exp, nums)
+		must.Eq(t, exp, nums)
 	}
 
 	// normal
@@ -237,9 +237,9 @@ func Test_rangeParser_Spans(t *testing.T) {
 	try := func(input string, n int, exp []int) {
 		rp := &rangeParser{}
 		cols, err := rp.Spans(input)
-		require.NoError(t, err)
+		must.NoError(t, err)
 		iList := cols.Columns(n)
-		require.Equal(t, exp, iList)
+		must.Eq(t, exp, iList)
 	}
 
 	try("1:3", 3, []int{0, 1, 2})
@@ -254,9 +254,9 @@ func Test_leftExpParser_Spans(t *testing.T) {
 	try := func(input string, n int, exp []int) {
 		lep := &leftExpParser{}
 		cols, err := lep.Spans(input)
-		require.NoError(t, err)
+		must.NoError(t, err)
 		iList := cols.Columns(n)
-		require.Equal(t, exp, iList)
+		must.Eq(t, exp, iList)
 	}
 
 	// normal
@@ -278,9 +278,9 @@ func Test_rightExpParser_Spans(t *testing.T) {
 	try := func(input string, n int, exp []int) {
 		lep := &rightExpParser{}
 		cols, err := lep.Spans(input)
-		require.NoError(t, err)
+		must.NoError(t, err)
 		iList := cols.Columns(n)
-		require.Equal(t, exp, iList)
+		must.Eq(t, exp, iList)
 	}
 
 	// normal
@@ -301,15 +301,15 @@ func Test_rightExpParser_Spans(t *testing.T) {
 func Test_Components(t *testing.T) {
 	s := "1,-3,4:7"
 	cols, err := Components(s)
-	require.NoError(t, err)
-	require.Equal(t, 3, len(cols))
+	must.NoError(t, err)
+	must.LenSlice(t, 3, cols)
 }
 
 func Test_Combine(t *testing.T) {
 	s := "1,-3,4:7"
 	cols, err := Components(s)
-	require.NoError(t, err)
+	must.NoError(t, err)
 	columns := Combine(cols)
 	iList := columns.Columns(10)
-	require.Equal(t, []int{0, 7, 3, 4, 5, 6}, iList)
+	must.Eq(t, []int{0, 7, 3, 4, 5, 6}, iList)
 }
