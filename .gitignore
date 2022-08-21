@@ -2,3 +2,5 @@
 **/*.snap
 
 cmd/fields/fields
+
+.DS_Store
