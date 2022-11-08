@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-PATH="${GOPATH}/bin"
+PATH=$PATH:$(go env GOBIN)
 
 function test {
  escape="${1}"
