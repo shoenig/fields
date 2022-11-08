@@ -8,7 +8,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"gophers.dev/cmds/fields"
+	"github.com/shoenig/fields"
 )
 
 const (

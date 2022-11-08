@@ -3,17 +3,14 @@ fields
 
 Use `fields` to chop input into selectable columns.
 
-[![Go Report Card](https://goreportcard.com/badge/gophers.dev/cmds/fields)](https://goreportcard.com/report/gophers.dev/cmds/fields)
-[![Build Status](https://travis-ci.org/shoenig/fields.svg?branch=master)](https://travis-ci.org/shoenig/fields)
-[![GoDoc](https://godoc.org/gophers.dev/cmds/fields?status.svg)](https://godoc.org/gophers.dev/cmds/fields)
-![NetflixOSS Lifecycle](https://img.shields.io/osslifecycle/shoenig/fields.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/shoenig/fields)](https://goreportcard.com/report/github.com/shoenig/fields)
 ![GitHub](https://img.shields.io/github/license/shoenig/fields.svg)
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/fields)
 
 # Project Overview
 
-Module `gophers.dev/cmds/fields` provides a command-line utility for processing
+Module `github.com/shoenig/fields` provides a command-line utility for processing
 columns of input text.
 
 # Getting Started
@@ -29,7 +26,7 @@ $ sudo snap install fields
 
 The `fields` command can be compiled by running
 ```bash
-$ go install gophers.dev/cmds/fields/cmd/fields@latest
+$ go install github.com/shoenig/fields/cmd/fields@latest
 ```
 
 # Example Usages
@@ -90,9 +87,9 @@ a b f c d e b c d e f g a b c d e
 
 # Contributing
 
-The `gophers.dev/cmds/fields` module is always improving with new features
+The `github.com/shoenig/fields` module is always improving with new features
 and error corrections. For contributing bug fixes and new features please file an issue.
 
 # License
 
-The `gophers.dev/cmds/fields` module is open source under the [MIT](LICENSE) license.
+The `github.com/shoenig/fields` module is open source under the [MIT](LICENSE) license.

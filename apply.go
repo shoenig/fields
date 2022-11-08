@@ -1,4 +1,4 @@
-package fields // import "gophers.dev/cmds/fields"
+package fields
 
 import (
 	"bufio"

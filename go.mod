@@ -1,4 +1,4 @@
-module gophers.dev/cmds/fields
+module github.com/shoenig/fields
 
 go 1.18
 
