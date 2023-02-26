@@ -4,8 +4,8 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/shoenig/test/must"
 	"github.com/shoenig/regexplus"
+	"github.com/shoenig/test/must"
 )
 
 func try1(t *testing.T, s string, match bool, exp string, re *regexp.Regexp) {
@@ -302,7 +302,7 @@ func Test_Components(t *testing.T) {
 	s := "1,-3,4:7"
 	cols, err := Components(s)
 	must.NoError(t, err)
-	must.LenSlice(t, 3, cols)
+	must.Len(t, 3, cols)
 }
 
 func Test_Combine(t *testing.T) {

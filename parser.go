@@ -1,11 +1,10 @@
 package fields
 
 import (
+	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
-
-	"github.com/pkg/errors"
 )
 
 // Components returns a Spanner which is a superset of one or more other Spanner
@@ -66,7 +65,7 @@ func Single(s string) (Spanner, error) {
 	case rightExpRe.MatchString(s):
 		return &rightExpParser{}, nil
 	default:
-		return nil, errors.Errorf("not valid syntax %q", s)
+		return nil, fmt.Errorf("not valid syntax %q", s)
 	}
 }
 
@@ -173,7 +172,7 @@ type rangeParser struct{}
 func (rp *rangeParser) Spans(s string) (Columns, error) {
 	numbers := strings.SplitN(s, ":", 2)
 	if len(numbers) != 2 {
-		return nil, errors.Errorf("not a valid range %q", s)
+		return nil, fmt.Errorf("not a valid range %q", s)
 	}
 
 	left := numbers[0]
@@ -197,7 +196,7 @@ func (rp *rangeParser) Spans(s string) (Columns, error) {
 func parseNumber(value string) (int, error) {
 	i, err := strconv.Atoi(value)
 	if err != nil {
-		return 0, errors.Errorf("not a number: %q", value)
+		return 0, fmt.Errorf("not a number: %q", value)
 	}
 	return i, nil
 }
