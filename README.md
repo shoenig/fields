@@ -3,10 +3,8 @@ fields
 
 Use `fields` to chop input into selectable columns.
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/shoenig/fields)](https://goreportcard.com/report/github.com/shoenig/fields)
 ![GitHub](https://img.shields.io/github/license/shoenig/fields.svg)
-
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/fields)
+[![run-ci](https://github.com/shoenig/fields/actions/workflows/ci.yml/badge.svg)](https://github.com/shoenig/fields/actions/workflows/ci.yml)
 
 # Project Overview
 
@@ -15,16 +13,9 @@ columns of input text.
 
 # Getting Started
 
-#### Install from SnapCraft
-
-The `fields` command can be installed as a snap
-```bash
-$ sudo snap install fields
-```
-
 #### Build from source
 
-The `fields` command can be compiled by running
+The `fields` command can be installed via Go by running
 ```bash
 $ go install github.com/shoenig/fields/cmd/fields@latest
 ```
