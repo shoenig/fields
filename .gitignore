@@ -1,7 +1,9 @@
+# Build Output
+output/
+dist/
+cmd/fields/fields
 **/cover.out
 **/*.snap
-output/
 
-cmd/fields/fields
-
+# OS stuff
 .DS_Store

@@ -10,6 +10,13 @@ builds:
       - freebsd
       - openbsd
       - plan9
+    goarch:
+      - amd64
+      - arm64
+    goamd64:
+      - v3 # avx2
+    main: ./cmd/fields
+    binary: fields
 checksum:
   name_template: 'checksums.txt'
 snapshot:
@@ -20,4 +27,3 @@ changelog:
     exclude:
       - '^docs:'
       - '^test:'
-
