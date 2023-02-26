@@ -1,15 +1,11 @@
 fields
 ======
 
-Use `fields` to chop input into selectable columns.
+Use the `fields` CLI command as a modern replacement for `awk` + `cut`.
+With fields you specify which columns of text you want, in a flexible format.
 
 ![GitHub](https://img.shields.io/github/license/shoenig/fields.svg)
 [![run-ci](https://github.com/shoenig/fields/actions/workflows/ci.yml/badge.svg)](https://github.com/shoenig/fields/actions/workflows/ci.yml)
-
-# Project Overview
-
-Module `github.com/shoenig/fields` provides a command-line utility for processing
-columns of input text.
 
 # Getting Started
 
