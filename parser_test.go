@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/shoenig/test/must"
-	"gophers.dev/pkgs/regexplus"
+	"github.com/shoenig/regexplus"
 )
 
 func try1(t *testing.T, s string, match bool, exp string, re *regexp.Regexp) {
