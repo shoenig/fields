@@ -58,7 +58,7 @@ func acceptable(args []string) bool {
 
 func (c *command) Execute(args []string) int {
 	if !acceptable(args) {
-		_, _ = fmt.Fprintf(c.io.stdOut, helpText)
+		_, _ = fmt.Fprint(c.io.stdOut, helpText)
 		return exitErr
 	}
 

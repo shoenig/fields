@@ -204,7 +204,7 @@ func parseNumber(value string) (int, error) {
 func fill(left, right int) []int {
 	if left <= right {
 		length := (right - left) + 1
-		nums := make([]int, length, length)
+		nums := make([]int, length)
 		for i := 0; i < length; i++ {
 			nums[i] = left + i - 1
 		}
@@ -212,7 +212,7 @@ func fill(left, right int) []int {
 	}
 
 	length := (left - right) + 1
-	nums := make([]int, length, length)
+	nums := make([]int, length)
 	for i := length - 1; i >= 0; i-- {
 		nums[i] = left - i - 1
 	}

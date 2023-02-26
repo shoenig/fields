@@ -20,7 +20,6 @@ func try1(t *testing.T, s string, match bool, exp string, re *regexp.Regexp) {
 			re, s,
 		)["n"]
 		must.Eq(t, exp, result)
-
 	} else {
 		// check the regex does not match
 		must.False(t, matches)
