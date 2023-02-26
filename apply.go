@@ -2,10 +2,9 @@ package fields
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"strings"
-
-	"github.com/pkg/errors"
 )
 
 // Apply will actually select the desired columns from the input and write them
@@ -77,13 +76,13 @@ func write(words []string, output io.Writer) error {
 
 func validate(cols []int, n int) error {
 	if len(cols) == 0 {
-		return errors.Errorf("no columns match input length")
+		return fmt.Errorf("no columns match input length")
 	}
 
 	max := n - 1
 	for _, col := range cols {
 		if col > max {
-			return errors.Errorf("column %d is out of range [0,%d]", col, max)
+			return fmt.Errorf("column %d is out of range [0,%d]", col, max)
 		}
 	}
 	return nil

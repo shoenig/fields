@@ -19,8 +19,8 @@ func Test_setup(t *testing.T) {
 
 	seps, rem, err := setup(fs, args)
 	must.NoError(t, err)
-	must.EqCmp(t, "1,3,5", rem)
-	must.EqCmp(t, "", seps)
+	must.Eq(t, "1,3,5", rem)
+	must.Eq(t, "", seps)
 }
 
 func Test_setup_undefined_arg(t *testing.T) {
@@ -54,7 +54,7 @@ func Test_do(t *testing.T) {
 	must.NoError(t, err)
 
 	result := output.String()
-	must.EqCmp(t, "b d\n", result)
+	must.Eq(t, "b d\n", result)
 }
 
 func Test_do_bad_fields(t *testing.T) {
@@ -86,11 +86,11 @@ func Test_Execute(t *testing.T) {
 	})
 
 	exitCode := cmd.Execute([]string{"2:4,1"})
-	must.EqCmp(t, exitOK, exitCode)
+	must.Eq(t, exitOK, exitCode)
 
 	outStr := stdOut.String()
-	must.EqCmp(t, "b c d a\n", outStr)
+	must.Eq(t, "b c d a\n", outStr)
 
 	errStr := stdErr.String()
-	must.EqCmp(t, "", errStr)
+	must.Eq(t, "", errStr)
 }

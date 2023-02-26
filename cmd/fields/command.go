@@ -1,12 +1,11 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"io"
 	"strconv"
-
-	"github.com/pkg/errors"
 
 	"github.com/shoenig/fields"
 )
@@ -84,12 +83,12 @@ func (c *command) Execute(args []string) int {
 
 func setup(fs *flag.FlagSet, args []string) (string, string, error) {
 	if !acceptable(args) {
-		return "", "", errors.Errorf("expected 1 argument, got %d", len(args))
+		return "", "", fmt.Errorf("expected 1 argument, got %d", len(args))
 	}
 
 	err := fs.Parse(args)
 	if err != nil {
-		return "", "", errors.Wrapf(err, "parse args: %v", args)
+		return "", "", fmt.Errorf("parse args: %v: %w", args, err)
 	}
 
 	// todo: support custom cutset
@@ -108,7 +107,7 @@ func do(_, chosen string, input io.Reader, output io.Writer) error {
 	cols, err := fields.Components(chosen)
 
 	if err != nil {
-		return errors.Wrap(err, "failed to parse column set")
+		return fmt.Errorf("failed to parse column set: %w", err)
 	}
 
 	combo := fields.Combine(cols)
@@ -123,7 +122,7 @@ func finish(fs *flag.FlagSet, output io.Writer) error {
 	}
 
 	if !trailNL {
-		return errors.Errorf("appending newline not yet supported")
+		return errors.New("appending newline not yet supported")
 		// _, _ = io.WriteString(output, "\n")
 		// we need to control appending a newline to every line, first
 	}
