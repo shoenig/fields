@@ -10,8 +10,8 @@ jobs:
           version-file: go.mod
       - name: Vet
         run: |
-          go vet ./...
+          make vet
       - name: Tests
         run: |
-          go test -race -v ./...
+          make test
 

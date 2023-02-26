@@ -1,5 +1,6 @@
 **/cover.out
 **/*.snap
+output/
 
 cmd/fields/fields
 
