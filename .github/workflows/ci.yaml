@@ -1,0 +1,30 @@
+name: Run CI Tests
+on:
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+  push:
+    branches:
+      - 'main'
+jobs:
+  run-tests:
+    timeout-minutes: 5
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-tags: true
+      - uses: extractions/setup-just@f8a3cce218d9f83db3a2ecd90e41ac3de6cdfd9b
+      - uses: actions/setup-go@v6
+        with:
+          cache: true
+          go-version-file: go.mod
+      - name: Show System
+        run: |
+          uname -a
+          just sysinfo
+      - name: Run Go Test
+        run: |
+          just init tidy lint tests
+

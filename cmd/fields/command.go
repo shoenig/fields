@@ -92,10 +92,10 @@ func setup(fs *flag.FlagSet, args []string) (string, string, error) {
 	}
 
 	// todo: support custom cutset
-	//separators := fs.Lookup(delimitersLabel).Value.String()
-	//if separators != "" {
-	//	return "", "", errors.Errorf("custom cutsets not yet supported")
-	//}
+	// separators are not yet supported
+	// if separators != "" {
+	// 	return "", "", errors.Errorf("custom cutsets not yet supported")
+	// }
 	separators := ""
 
 	remArgs := fs.Args()
@@ -115,7 +115,7 @@ func do(_, chosen string, input io.Reader, output io.Writer) error {
 	return fields.Apply(combo, input, output)
 }
 
-func finish(fs *flag.FlagSet, output io.Writer) error {
+func finish(fs *flag.FlagSet, _ io.Writer) error {
 	trailNL, err := strconv.ParseBool(fs.Lookup(newLineLabel).Value.String())
 	if err != nil {
 		return err
