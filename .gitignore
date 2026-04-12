@@ -1,4 +1,5 @@
 # Build Output
+.bin/
 output/
 dist/
 cmd/fields/fields

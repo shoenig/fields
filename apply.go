@@ -2,6 +2,7 @@ package fields
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"io"
 	"strings"
@@ -76,13 +77,13 @@ func write(words []string, output io.Writer) error {
 
 func validate(cols []int, n int) error {
 	if len(cols) == 0 {
-		return fmt.Errorf("no columns match input length")
+		return errors.New("no columns match input length")
 	}
 
-	max := n - 1
+	maxCol := n - 1
 	for _, col := range cols {
-		if col > max {
-			return fmt.Errorf("column %d is out of range [0,%d]", col, max)
+		if col > maxCol {
+			return fmt.Errorf("column %d is out of range [0,%d]", col, maxCol)
 		}
 	}
 	return nil
