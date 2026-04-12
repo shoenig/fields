@@ -4,16 +4,17 @@ fields
 Use the `fields` CLI command as a modern replacement for `awk` + `cut`.
 With fields you specify which columns of text you want, in a flexible format.
 
-![GitHub](https://img.shields.io/github/license/shoenig/fields.svg)
-[![run-ci](https://github.com/shoenig/fields/actions/workflows/ci.yml/badge.svg)](https://github.com/shoenig/fields/actions/workflows/ci.yml)
-
 # Getting Started
+
+#### Download from releases
+
+Available to download pre-compiled binaries on [releases](https://github.com/shoenig/fields/releases)
 
 #### Build from source
 
 The `fields` command can be installed via Go by running
 ```bash
-$ go install github.com/shoenig/fields/cmd/fields@latest
+$ go install github.com/shoenig/fields@latest
 ```
 
 # Example Usages
@@ -71,11 +72,6 @@ b c d e
 $ fields 1,2,-2,3:5,2:,:-3 <<< "a b c d e f g"
 a b f c d e b c d e f g a b c d e
 ```
-
-# Contributing
-
-The `github.com/shoenig/fields` module is always improving with new features
-and error corrections. For contributing bug fixes and new features please file an issue.
 
 # License
 
