@@ -12,7 +12,7 @@ default:
 # locally install build dependencies
 [group('setup')]
 init:
-    go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.11.4
+    go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.15.0
 
 # build the binary
 [group('build')]

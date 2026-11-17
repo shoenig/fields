@@ -1,7 +1,7 @@
-cattlecloud.net/go/babycli v0.2.0 h1:niw4uPiFQT7bekq8OJ3LoiIsz2B7L6EZcO+esMx9AP0=
-cattlecloud.net/go/babycli v0.2.0/go.mod h1:IhC9GNNMMlDr5sx/lMFBDa1d7jvkI1sluTPsKbpvoAU=
-cattlecloud.net/go/stacks v1.1.0 h1:uXnOnluwPT+3IfRDzTmkEP8RCfToBeNremjahViWUhY=
-cattlecloud.net/go/stacks v1.1.0/go.mod h1:BD7LcLq19hHEyA+oQOrInqmjjiCccCcVTIxt8eEmW4M=
+cattlecloud.net/go/babycli v0.2.2 h1:svdBTAL7eTWipk3Fa4cVP6CTxbIaqYMhHUlAA0FWeW0=
+cattlecloud.net/go/babycli v0.2.2/go.mod h1:3LABFGN1bV6T6LHSF9SnuFf3Xupb5lYwUf1vYd/oHJc=
+cattlecloud.net/go/stacks v1.1.3 h1:tPsMsQ3zE8nLZ+M+hqHM6GDLyfeMS8dcocAC9TCL5f0=
+cattlecloud.net/go/stacks v1.1.3/go.mod h1:rkbB7YWTcP2QLwBk14BiKH6AaUCBi/EMKPi1XnoAx08=
 github.com/google/go-cmp v0.7.0 h1:wk8382ETsv4JYUZwIsn6YpYiWiBsYLSJiTsyBybVuN8=
 github.com/google/go-cmp v0.7.0/go.mod h1:pXiqmnSA92OHEEa9HXL2W4E7lf9JzCmGVUdgjX3N/iU=
 github.com/shoenig/regexplus v0.3.0 h1:+eJZ5P4y1IY4+NgkIIvIqqdG/uYRBuSg4vWUjEppLcY=
